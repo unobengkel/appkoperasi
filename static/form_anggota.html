@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Data Anggota Koperasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col md:flex-row">
+
+    <!-- Sidebar -->
+    <aside class="w-full md:w-64 bg-slate-900 md:min-h-screen flex-shrink-0 p-4 border-r border-slate-800">
+        <div class="mb-8 px-4 mt-4 hidden md:block">
+            <h1 class="text-xl font-bold text-white flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                Koperasi
+            </h1>
+        </div>
+        
+        <nav class="space-y-2 flex flex-row gap-2 md:flex-col md:gap-0">
+            <a href="form_anggota.html" class="flex flex-1 items-center justify-center md:justify-start gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white font-medium transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                <span class="hidden md:inline">Input Data</span>
+            </a>
+            <a href="daftar_anggota.html" class="flex flex-1 items-center justify-center md:justify-start gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                <span class="hidden md:inline">Daftar Anggota</span>
+            </a>
+            <div class="hidden md:block h-px bg-slate-800 my-2"></div>
+            <a href="tutorial.html" class="flex flex-1 items-center justify-center md:justify-start gap-3 px-4 py-3 rounded-lg text-emerald-400 hover:bg-emerald-900/30 hover:text-emerald-300 font-medium transition-colors md:mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                <span class="hidden md:inline">Buku Panduan Web</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+        <div class="max-w-5xl mx-auto space-y-8">
+        <!-- Header -->
+        <header class="text-center space-y-2">
+            <h1 class="text-3xl font-bold text-slate-800">Sistem Informasi Anggota Koperasi</h1>
+            <p class="text-slate-500">Kelola data keanggotaan dengan mudah dan efisien</p>
+        </header>
+
+        <!-- Form Panel -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 p-4">
+                <h2 id="formTitle" class="text-white font-semibold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Input Data Anggota
+                </h2>
+            </div>
+            <div class="p-6">
+                <form id="memberForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-700">Nama Lengkap</label>
+                        <input type="text" id="nama" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="Masukkan nama sesuai KTP">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-700">Tanggal Lahir</label>
+                        <input type="date" id="tglLahir" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-700">Umur (Otomatis)</label>
+                        <input type="text" id="umur" readonly class="w-full px-4 py-2 rounded-lg border border-slate-100 bg-slate-50 text-slate-500 cursor-not-allowed" placeholder="0 Tahun">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-700">Nomor Telepon</label>
+                        <input type="tel" id="telp" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="08xxxxxxxxxx">
+                    </div>
+
+                    <div class="space-y-2 md:col-span-2">
+                        <label class="text-sm font-medium text-slate-700">Alamat</label>
+                        <textarea id="alamat" required rows="2" class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="Alamat lengkap domisili"></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="md:col-span-2 flex flex-wrap gap-3 pt-4 border-t border-slate-100">
+                        <!-- Add Mode Buttons -->
+                        <div id="addButtons" class="flex gap-3">
+                            <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                                Simpan
+                            </button>
+                            <button type="button" onclick="clearForm()" class="px-6 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium rounded-lg transition-colors">
+                                Clear
+                            </button>
+                        </div>
+
+                        <!-- Edit Mode Buttons (Hidden by default) -->
+                        <div id="editButtons" class="hidden flex gap-3">
+                            <button type="button" onclick="updateMember()" class="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                                Update
+                            </button>
+                            <button type="button" onclick="resetForm()" class="px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors">
+                                Reset
+                            </button>
+                            <button type="button" onclick="cancelEdit()" class="px-6 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium rounded-lg transition-colors">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Table Panel -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-100 p-4 border-b border-slate-200 flex justify-between items-center">
+                <h2 class="text-slate-800 font-semibold">Tabel Data Anggota</h2>
+                <span class="text-xs font-medium px-2 py-1 bg-white border border-slate-300 rounded text-slate-600">Klik baris untuk opsi Edit/Hapus</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-600 text-sm uppercase tracking-wider">
+                            <th class="px-6 py-4 font-semibold">No</th>
+                            <th class="px-6 py-4 font-semibold">Nama</th>
+                            <th class="px-6 py-4 font-semibold">Tanggal Lahir</th>
+                            <th class="px-6 py-4 font-semibold">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="memberTableBody" class="divide-y divide-slate-100">
+                        <!-- Data rows will appear here -->
+                    </tbody>
+                </table>
+                <div id="emptyState" class="p-12 text-center text-slate-400">
+                    Belum ada data anggota.
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <!-- Popup Modal Opsi -->
+    <div id="optionsModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-sm w-full overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div class="p-6 space-y-4">
+                <div class="text-center">
+                    <h3 class="text-lg font-bold text-slate-800">Opsi Data</h3>
+                    <p class="text-slate-500 text-sm" id="modalTargetName"></p>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <button onclick="triggerEdit()" class="w-full py-3 bg-blue-50 text-blue-700 font-semibold rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                        Edit Data
+                    </button>
+                    <button onclick="triggerDelete()" class="w-full py-3 bg-red-50 text-red-700 font-semibold rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        Batalkan Penyimpanan
+                    </button>
+                    <button onclick="closeModal()" class="w-full py-2 text-slate-400 text-sm font-medium hover:text-slate-600 transition-colors">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 bg-slate-800 text-white px-6 py-3 rounded-lg shadow-2xl translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <span id="toastMsg">Data berhasil disimpan!</span>
+    </div>
+
+    <script>
+        // State Management
+        let members = [];
+        let editingIndex = -1;
+        let selectedIndex = -1;
+
+        // Elements
+        const form = document.getElementById('memberForm');
+        const tglLahirInput = document.getElementById('tglLahir');
+        const umurInput = document.getElementById('umur');
+        const tableBody = document.getElementById('memberTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const optionsModal = document.getElementById('optionsModal');
+        const modalTargetName = document.getElementById('modalTargetName');
+
+
+
+        // Umur Auto-calculation
+        tglLahirInput.addEventListener('change', () => {
+            const birthDate = new Date(tglLahirInput.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            umurInput.value = isNaN(age) ? '0 Tahun' : `${age} Tahun`;
+        });
+
+        // Form Submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const newMember = {
+                nama: document.getElementById('nama').value,
+                tglLahir: document.getElementById('tglLahir').value,
+                umur: document.getElementById('umur').value,
+                alamat: document.getElementById('alamat').value,
+                telp: document.getElementById('telp').value,
+                status: 'Success' // status default setelah berhasil disimpan
+            };
+
+            try {
+                const response = await fetch('/api/anggota', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newMember)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    newMember.id = data.id;
+                    members.unshift(newMember); // Insert at the beginning of the list
+                    renderTable();
+                    clearForm();
+                    showToast('Anggota baru berhasil ditambahkan!');
+                }
+            } catch (error) {
+                console.error("Failed to add member:", error);
+            }
+        });
+
+        // Table Rendering
+        function renderTable() {
+            tableBody.innerHTML = '';
+            
+            if (members.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            members.forEach((member, index) => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-slate-50 cursor-pointer transition-colors group";
+                row.onclick = () => openOptions(index);
+
+                const statusClasses = {
+                    'Tunggu': 'bg-blue-100 text-blue-700',
+                    'Success': 'bg-emerald-100 text-emerald-700',
+                    'Gagal': 'bg-red-100 text-red-700'
+                };
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 text-sm text-slate-500 font-medium">${member.id}</td>
+                    <td class="px-6 py-4 text-sm font-semibold text-slate-800">${member.nama}</td>
+                    <td class="px-6 py-4 text-sm text-slate-600">${member.tglLahir}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tight ${statusClasses[member.status]}">
+                            ${member.status}
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Modal Logic
+        function openOptions(index) {
+            selectedIndex = index;
+            modalTargetName.textContent = `Anggota: ${members[index].nama}`;
+            optionsModal.classList.remove('hidden');
+            optionsModal.classList.add('flex');
+        }
+
+        function closeModal() {
+            optionsModal.classList.add('hidden');
+            optionsModal.classList.remove('flex');
+            selectedIndex = -1;
+        }
+
+        // CRUD: Delete
+        async function triggerDelete() {
+            if (selectedIndex > -1) {
+                const memberId = members[selectedIndex].id;
+                try {
+                    const response = await fetch(`/api/anggota/${memberId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        members.splice(selectedIndex, 1);
+                        renderTable();
+                        closeModal();
+                        showToast('Data berhasil dihapus dari sistem.', 'bg-red-600');
+                    }
+                } catch (error) {
+                    console.error("Failed to delete member:", error);
+                }
+            }
+        }
+
+        // CRUD: Edit Trigger
+        function triggerEdit() {
+            if (selectedIndex > -1) {
+                editingIndex = selectedIndex;
+                const member = members[editingIndex];
+                
+                // Populate Form
+                document.getElementById('nama').value = member.nama;
+                document.getElementById('tglLahir').value = member.tglLahir;
+                document.getElementById('alamat').value = member.alamat;
+                document.getElementById('telp').value = member.telp;
+                
+                // Trigger umur calculation
+                tglLahirInput.dispatchEvent(new Event('change'));
+
+                // Switch UI Mode
+                document.getElementById('formTitle').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    Edit Data: ${member.nama}
+                `;
+                document.getElementById('addButtons').classList.add('hidden');
+                document.getElementById('editButtons').classList.remove('hidden');
+
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                closeModal();
+            }
+        }
+
+        // CRUD: Update
+        async function updateMember() {
+            if (editingIndex > -1) {
+                const memberId = members[editingIndex].id;
+                const updatedMember = {
+                    nama: document.getElementById('nama').value,
+                    tglLahir: document.getElementById('tglLahir').value,
+                    umur: document.getElementById('umur').value,
+                    alamat: document.getElementById('alamat').value,
+                    telp: document.getElementById('telp').value,
+                    status: members[editingIndex].status
+                };
+                
+                try {
+                    const response = await fetch(`/api/anggota/${memberId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updatedMember)
+                    });
+                    
+                    if (response.ok) {
+                        members[editingIndex] = { ...updatedMember, id: memberId };
+                        renderTable();
+                        cancelEdit();
+                        showToast('Data anggota diperbarui!');
+                    }
+                } catch (error) {
+                    console.error("Failed to update member:", error);
+                }
+            }
+        }
+
+        // Reset Form inside Edit Mode
+        function resetForm() {
+            if (editingIndex > -1) {
+                const original = members[editingIndex];
+                document.getElementById('nama').value = original.nama;
+                document.getElementById('tglLahir').value = original.tglLahir;
+                document.getElementById('alamat').value = original.alamat;
+                document.getElementById('telp').value = original.telp;
+                tglLahirInput.dispatchEvent(new Event('change'));
+            }
+        }
+
+        // Cancel Edit and Return to Add Mode
+        function cancelEdit() {
+            editingIndex = -1;
+            clearForm();
+            document.getElementById('formTitle').innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                Input Data Anggota
+            `;
+            document.getElementById('addButtons').classList.remove('hidden');
+            document.getElementById('editButtons').classList.add('hidden');
+        }
+
+        // Clear Form Utility
+        function clearForm() {
+            form.reset();
+            umurInput.value = '0 Tahun';
+        }
+
+        // Toast Notification Logic
+        function showToast(msg, colorClass = 'bg-slate-800') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            
+            toast.className = `fixed bottom-8 right-8 text-white px-6 py-3 rounded-lg shadow-2xl transition-all duration-300 flex items-center gap-3 z-[100] ${colorClass}`;
+            toastMsg.textContent = msg;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Render on Initial Load Empty
+        window.onload = () => {
+            renderTable();
+        };
+    </script>
+</body>
+</html>

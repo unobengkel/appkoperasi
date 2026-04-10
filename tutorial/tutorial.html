@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Penggunaan - Koperasi Pintar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .active-tab { background-color: #2563eb; color: white; font-weight: 500; }
+        .inactive-tab { color: #94a3b8; background-color: transparent; }
+        .inactive-tab:hover { background-color: #1e293b; color: white; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col md:flex-row">
+
+    <!-- Sidebar -->
+    <aside class="w-full md:w-72 bg-slate-900 md:min-h-screen flex-shrink-0 p-4 border-r border-slate-800">
+        <div class="mb-8 px-4 mt-4 hidden md:flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+            <h1 class="text-xl font-bold text-white">Buku Panduan Web</h1>
+        </div>
+        
+        <nav class="space-y-1 flex flex-col gap-1">
+            <button onclick="showPanel('setup')" id="tab-setup" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg active-tab text-left transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                1. Setup dan Instalasi
+            </button>
+            <button onclick="showPanel('run-biasa')" id="tab-run-biasa" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg inactive-tab text-left transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                2. Run Program (Biasa)
+            </button>
+            <button onclick="showPanel('run-pm')" id="tab-run-pm" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg inactive-tab text-left transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
+                3. Run dengan Project Manager
+            </button>
+            <button onclick="showPanel('penggunaan-input')" id="tab-penggunaan-input" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg inactive-tab text-left transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                4. Halaman Input Data
+            </button>
+            <button onclick="showPanel('penggunaan-daftar')" id="tab-penggunaan-daftar" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg inactive-tab text-left transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                5. Halaman Daftar Anggota
+            </button>
+            
+         
+        </nav>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8 min-h-[80vh]">
+            
+            <!-- Panel 1: Setup dan Instalasi -->
+            <div id="panel-setup" class="panel-content block animate-in fade-in duration-300">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b pb-4">
+                    Cara Setup dan Instalasi
+                </h2>
+                <div class="space-y-6 text-slate-600 leading-relaxed">
+                    <p>
+                        Aplikasi Sistem Manajemen Koperasi ini dibangun menggunakan fondasi Web standard dipadukan dengan Python (FastAPI). Ikuti langkah-langkah di bawah ini untuk menyiapkan lingkungan pengembangan Anda.
+                    </p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                        <p class="font-semibold text-blue-800 mb-1">Prasyarat Sistem</p>
+                        <ul class="list-disc pl-5 text-blue-700 text-sm space-y-1">
+                            <li>Python 3.8 atau yang lebih baru</li>
+                            <li>Browser modern (Chrome/Edge/Firefox)</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Langkah 1: Download/Membuka Proyek</h3>
+                        <p>Pastikan Anda sudah berada di folder proyek aplikasi koperasi melalui <em>Command Prompt</em> atau terminal text editor Anda (VSCode/Sublime).</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Langkah 2: Menginstal Dependensi</h3>
+                        <p class="mb-3">Aplikasi web backend membutuhkan library FastAPI, Uvicorn, dan Pydantic. Anda dapat menginstalnya sekaligus melalui perintah:</p>
+                        <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-sm shadow-inner">
+                            pip install -r requirements.txt
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Run Program (Biasa) -->
+            <div id="panel-run-biasa" class="panel-content hidden animate-in fade-in duration-300">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b pb-4">
+                    Cara Menjalankan Server (Biasa)
+                </h2>
+                <div class="space-y-6 text-slate-600 leading-relaxed">
+                    <p>
+                        Mode ini adalah cara standar untuk uji coba dan pengembangan secara instan.
+                    </p>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">1. Menjalankan Uvicorn</h3>
+                        <p class="mb-3">Buka terminal Anda di folder direktori proyek yang memiliki file <code>main.py</code>, lalu ketik:</p>
+                        <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-sm shadow-inner relative group">
+                            uvicorn main:app --reload
+                        </div>
+                        <p class="mt-3 text-sm text-slate-500">Keterangan: Opsi <code>--reload</code> digunakan supaya saat ada perubahan pada program, server merestart secara otomatis.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">2. Mengakses Aplikasi Web</h3>
+                        <p>Setelah pesan terminal mengatakan <em>"Application startup complete"</em>, Anda bisa membuka rute server langsung di web browser:</p>
+                        <ul class="list-disc pl-5 space-y-2 mt-3">
+                            <li><a href="http://127.0.0.1:8000" class="text-blue-600 font-medium hover:underline">http://127.0.0.1:8000</a> atau <a href="http://localhost:8000" class="text-blue-600 font-medium hover:underline">localhost:8000</a></li>
+                        </ul>
+                        <p class="mt-3">Server akan secara otomatis me-redirect (mengarahkan) Anda ke halaman Input Data Anggota.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3: Run dengan Project Manager -->
+            <div id="panel-run-pm" class="panel-content hidden animate-in fade-in duration-300">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b pb-4">
+                    Cara Menjalankan Menggunakan Production/Process Manager
+                </h2>
+                <div class="space-y-6 text-slate-600 leading-relaxed">
+                    <p>
+                        Jika Anda ingin menjalankannya di server VPS secara terus-menerus tanpa terhenti saat terminal di-close, disarankan menggunakan <strong>PM2</strong>.
+                    </p>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Persiapan NPM & PM2</h3>
+                        <p class="mb-3">Anda membutuhkan Node.js. Setelah instalasi Node.js, jalankan perintah ini (sekali saja):</p>
+                        <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-sm shadow-inner">
+                            npm install -g pm2
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Memulai via PM2</h3>
+                        <p class="mb-3">Di direktori proyek web Anda, jalankan perintah ini:</p>
+                        <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-sm shadow-inner">
+                            pm2 start "uvicorn main:app --port 8000" --name "koperasi-server"
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2 mt-4 text-sm">
+                            <li>Cek log dengan status aplikasi: <code>pm2 logs koperasi-server</code></li>
+                            <li>Tutup atau hentikan dengan: <code>pm2 stop koperasi-server</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 4: Halaman Input -->
+            <div id="panel-penggunaan-input" class="panel-content hidden animate-in fade-in duration-300">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b pb-4">
+                    Cara Penggunaan Halaman Input Data Anggota
+                </h2>
+                <div class="space-y-6 text-slate-600 leading-relaxed">
+                    <p>
+                        Halaman Input Data digunakan sebagai halaman pintu gerbang/penerimaan anggota per sesi.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <div class="border rounded-xl p-5 hover:border-blue-400 transition-colors">
+                            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2 text-lg">
+                                <span class="bg-blue-100 text-blue-700 rounded-full w-6 h-6 flex items-center justify-center text-sm">1</span>
+                                Pengisian Biodata
+                            </h4>
+                            <p class="text-sm">Isikan form secara lengkap. Sistem akan <strong>menghitung dan mengisi Umur secara otomatis</strong> ketika tanggal lahir dipilih dari pop-up kalender.</p>
+                        </div>
+                        <div class="border rounded-xl p-5 hover:border-blue-400 transition-colors">
+                            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2 text-lg">
+                                <span class="bg-blue-100 text-blue-700 rounded-full w-6 h-6 flex items-center justify-center text-sm">2</span>
+                                Penyimpanan
+                            </h4>
+                            <p class="text-sm">Tekan tombol Simpan. Status akan tersemat "Success" secara otomatis di server database. Tabel sesaat di bagian bawah akan ter-update sesaat.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg mt-6">
+                        <h4 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                            Fungsi Tabel Sementara
+                        </h4>
+                        <p class="text-sm text-amber-700">Tabel pada mode Input bertujuan hanya sebagai pencatatan atau riwayat pendaftaran bagi operator untuk sesi yang sedang berlangsung. Tabel ini <strong>akan hilang dari layar bila di-refresh</strong>, untuk kemudahan input baru di masa kerja berikutnya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 5: Halaman Daftar -->
+            <div id="panel-penggunaan-daftar" class="panel-content hidden animate-in fade-in duration-300">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b pb-4">
+                    Cara Penggunaan Halaman Daftar Anggota
+                </h2>
+                <div class="space-y-6 text-slate-600 leading-relaxed">
+                    <p>
+                        Halaman ini adalah *Master View* dari seluruh tabel database Koperasi yang sesungguhnya.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <strong class="text-slate-800 block mb-1">Pencarian Universal Asynchronous</strong>
+                            Gunakan kotak pencarian di bagian atas jika ingin mencari anggota dengan nama tertentu dan klik Cari. Proses ini mencari data melalui RAM sementara web.
+                        </li>
+                        <li class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <strong class="text-slate-800 block mb-1">Edit / Delete Data Universal</strong>
+                            Jika ada baris data yang cacat, klik/ketuk persis di barisan anggota tersebut. Akan muncul jendela Form Melayang (*Pop-Up Modal*). Di tempat tersebut, Anda bebas untuk mengedit semua bidang lalu klik Edit, atau klik Delete.
+                        </li>
+                        <li class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center justify-between">
+                            <div>
+                                <strong class="text-emerald-800 block mb-1">Cetak Data Menjadi Excel (.xlsx)</strong>
+                                Anda dapat mengunduh seluruh baris yang tersisa (terfilter) di dalam tabel ke file berwujud Data Excel.
+                            </div>
+                            <span class="bg-emerald-600 text-white font-bold px-4 py-2 rounded-lg text-xs ml-4 flex-shrink-0">Cetak Excel</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function showPanel(panelName) {
+            // Sembunyikan seluruh panel
+            const panels = document.querySelectorAll('.panel-content');
+            panels.forEach(p => {
+                p.classList.add('hidden');
+                p.classList.remove('block');
+            });
+
+            // Tampilkan panel yang dituju
+            const targetPanel = document.getElementById('panel-' + panelName);
+            if (targetPanel) {
+                targetPanel.classList.remove('hidden');
+                targetPanel.classList.add('block');
+            }
+
+            // Atur styling tab (sidebar navigasi)
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(t => {
+                t.classList.remove('active-tab');
+                t.classList.add('inactive-tab');
+            });
+            const activeTab = document.getElementById('tab-' + panelName);
+            if (activeTab) {
+                activeTab.classList.remove('inactive-tab');
+                activeTab.classList.add('active-tab');
+            }
+        }
+    </script>
+</body>
+</html>
