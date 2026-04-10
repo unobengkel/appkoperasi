@@ -139,6 +139,9 @@
                         <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-sm shadow-inner">
                             pm2 start "uvicorn main:app --port 8000" --name "koperasi-server"
                         </div>
+                        <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-sm shadow-inner">
+                            pm2 start "python3 -m uvicorn main:app --host 0.0.0.0 --port 10011" --name "koperasi-server"
+                        </div>
                         <ul class="list-disc pl-5 space-y-2 mt-4 text-sm">
                             <li>Cek log dengan status aplikasi: <code>pm2 logs koperasi-server</code></li>
                             <li>Tutup atau hentikan dengan: <code>pm2 stop koperasi-server</code></li>
